@@ -16,12 +16,13 @@
           "accessory": "Spotify",
           "name": "Spotify",
           "playlist": "spotify:user:abc123:playlist:xyz",
+          "playlist_position": 6,
           "deviceId": "12345",
           "tokenUrl": "https://accounts.spotify.com/api/token",
           "volumeUrl": "https://api.spotify.com/v1/me/player/volume?volume_percent=25",
           "shuffleUrl": "https://api.spotify.com/v1/me/player/shuffle?state=true",
           "playUrl": "https://api.spotify.com/v1/me/player/play",
-          "base64clientToken": "abc123",
+          "base64clientToken": "<base64(clientid:clientsecret)>",
           "refreshToken": "xyz789"
         }
     ],

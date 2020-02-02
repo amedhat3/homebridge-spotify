@@ -77,13 +77,33 @@ class Spotify {
     this.base64clientToken = config['base64clientToken'];
     this.refreshToken = config['refreshToken'];
     this.playlist = config['playlist'];
+    this.playlist_position = config['playlist_position'];
+  }
+
+  getAlexaServices() {
+    let informationService = new Service.AccessoryInformation();
+    informationService
+      .setCharacteristic(Characteristic.Manufacturer, "Amazon")
+      .setCharacteristic(Characteristic.Model, "Alexa")
+      .setCharacteristic(Characteristic.SerialNumber, "XXXXXX");
+ 
+    let switchService = new Service.Switch("Spotify");
+    switchService
+      .getCharacteristic(Characteristic.On)
+        .on('get', this.getSwitchOnCharacteristic.bind(this))
+        .on('set', this.setSwitchOnCharacteristic.bind(this));
+ 
+    this.informationService = informationService;
+    this.switchService = switchService;
+
+    return [informationService, switchService];
   }
 
   getServices() {
     let informationService = new Service.AccessoryInformation();
     informationService
-      .setCharacteristic(Characteristic.Manufacturer, "Amazon")
-      .setCharacteristic(Characteristic.Model, "Alexa")
+      .setCharacteristic(Characteristic.Manufacturer, "LG")
+      .setCharacteristic(Characteristic.Model, "WebOs")
       .setCharacteristic(Characteristic.SerialNumber, "XXXXXX");
  
     let switchService = new Service.Switch("Spotify");
@@ -126,7 +146,7 @@ class Spotify {
             body: JSON.stringify({ 
               'context_uri': this.playlist,
               'offset': {
-                'position': 5,
+                'position': this.playlist_position,
                 'position_ms': 0  
               }
             }
