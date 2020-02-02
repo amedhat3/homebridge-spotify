@@ -1,4 +1,4 @@
-# homebridge-spotify-play
+# homebridge-spotify
 ## Example config.json
 ```
 {
